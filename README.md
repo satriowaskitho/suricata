@@ -632,6 +632,25 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	```
 
 ## 8. Tes Suricata
+- _Turn Off Packages Offload_
+Ubah sesuai _network interface_ masing-masing.
+
+	```bash
+	sudo ethtool -K enp0s3 tso off  
+	sudo ethtool -K enp0s3 tx off  
+	sudo ethtool -K enp0s3 gro off
+	```
+
+- Hapus `suricata.pid` bila ada.
+
+	```bash
+	sudo rm -R /var/run/suricata.pid
+	```
+
+- Jalankan Suricata. Pastikan _network interface_ sesuai dengan milik masing-masing.
+
+	```bash
+	sudo /usr/bin/suricata -D -c /etc/suricata/suricata.yaml -i enp0s3
+	```
 
 ## 9. Instalasi Filebeat
-
