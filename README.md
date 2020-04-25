@@ -4,9 +4,12 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 
 ### Tabel of Content
 
-```bash
-
-```
+1.  [ Instalasi Ubuntu 18.04 LTS di VM VirtualBox ](https://github.com/satriowaskitho/suricata/blob/master/README.md#1-instalasi-ubuntu-1804-lts-di-vm-virtualbox)  
+	1.1 [Persiapan Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#11-persiapan-instalasi-ubuntu-1804-lts) 
+	1.2 [Proses Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#12-proses-instalasi-ubuntu-1804-lts)
+	1.3  [_Setting Up a Basic Firewall_](https://github.com/satriowaskitho/suricata/blob/master/README.md#13-setting-up-a-basic-firewall)
+	1.4 [Configurasi  _Network Static IP Address_](https://github.com/satriowaskitho/suricata/blob/master/README.md#14--configurasi-network-static-ip-address)
+2. [Instalasi Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#2-instalasi-suricata) 
 
 ### System Requirements
 - OS	: Ubuntu 18.04 LTS
@@ -659,7 +662,7 @@ Ubah sesuai _network interface_ masing-masing.
 	sudo /usr/bin/suricata -D -c /etc/suricata/suricata.yaml -i enp0s3
 	```
 ## 9. Eksplorasi Dashboard Kibana
-Akses URL Kibana kalian. Tunggu sampai _loading_ selesai.
+Akses URL Kibana. Tunggu sampai _loading_ selesai.
 >http://[IP_Address_Server]:5601
 
 Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian masuk ke dashboard Kibana. Maka kalian akan diminta untuk memilih `default index`.
@@ -669,6 +672,9 @@ Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian ma
 
 ![](https://github.com/satriowaskitho/suricata/blob/master/images/901.png)
 
+Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila instalasi _template_ nya <ins>berhasil</ins> hehe. Untuk pertama kali, kalian bisa mencoba dashboard `SN-OVERVIEW`. Dashbord tersebut menampilkan banyak grafik dari aktifitas server yang dibaca oleh Suricata.
 
+Selanjutnya, kalian bisa mencobanya satu-satu. Tidak semua dashboard dapat menvisualisasikan log karena tergantung jenis log yang masuk dan jenis rules yang dikonfigurasikan di Suricata.
 
 ## 10. Instalasi Filebeat
+To be continue...
