@@ -156,7 +156,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	![](https://github.com/satriowaskitho/suricata/blob/master/images/104.png)
 
 
-	> `IP Address` berada di depan `inet` pada tiap `network interface` (ex. <ins>enp0s3</ins>).
+	> `IP Address` berada di depan `inet` pada tiap `network interface` (ex. <ins>192.168.100.11</ins>).
 
 ### 1.4  Configurasi _Network Static IP Address_
 - Buat file baru bernama `01-netcfg.yaml` dengan _command_ berikut:
@@ -725,6 +725,8 @@ Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian ma
 ![](https://github.com/satriowaskitho/suricata/blob/master/images/901.png)
 
 Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila instalasi _template_ nya <ins>berhasil</ins> hehe. Karena baru pertama kali, kalian bisa mencoba dashboard `SN-OVERVIEW`. Dashbord tersebut menampilkan banyak grafik dari aktifitas server yang dibaca oleh Suricata.
+
+![](https://github.com/satriowaskitho/suricata/blob/master/images/801.png)
 
 Selanjutnya, kalian bisa mencoba dashboard tersebut satu per satu. Tidak semua dashboard dapat menvisualisasikan log karena tergantung jenis log yang masuk dan jenis rules yang dikonfigurasikan di Suricata.
 
