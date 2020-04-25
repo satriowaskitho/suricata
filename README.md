@@ -12,7 +12,7 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 	
 	1.3  [Setting Up a Basic Firewall](https://github.com/satriowaskitho/suricata/blob/master/README.md#13-setting-up-a-basic-firewall)
 	 
-	1.5 [Configurasi  _Network Static IP Address_](https://github.com/satriowaskitho/suricata/blob/master/README.md#14--configurasi-network-static-ip-address)
+	1.4 [Configurasi  _Network Static IP Address_](https://github.com/satriowaskitho/suricata/blob/master/README.md#14--configurasi-network-static-ip-address)
 
 2. [Instalasi Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#2-instalasi-suricata) 
 
@@ -44,7 +44,7 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 
 	5.2 [Konfigurasi Kibana](https://github.com/satriowaskitho/suricata/blob/master/README.md#52-konfigurasi-kibana)
 
-	5.2 [Instal Template Kibana 6](https://github.com/satriowaskitho/suricata/blob/master/README.md#53-instal-template-kibana-6)
+	5.3 [Instal Template Kibana 6](https://github.com/satriowaskitho/suricata/blob/master/README.md#53-instal-template-kibana-6)
 
 6. [Instalasi Logstash](https://github.com/satriowaskitho/suricata/blob/master/README.md#6-instalasi-logstash)
 
@@ -52,9 +52,11 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 
 	6.2 [Download GeoLite2-City](https://github.com/satriowaskitho/suricata/blob/master/README.md#62-download-geolite2-city)
 
-	6.2 [Konfigurasi Logstash](https://github.com/satriowaskitho/suricata/blob/master/README.md#63-konfigurasi-logstash)
+	6.3 [Konfigurasi Logstash](https://github.com/satriowaskitho/suricata/blob/master/README.md#63-konfigurasi-logstash)
 
-	
+7. [Tes Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#7-tes-suricata)
+8. [Eksplorasi Dashboard Kibana](https://github.com/satriowaskitho/suricata/blob/master/README.md#8-eksplorasi-dashboard-kibana)
+9. [Instalasi Filebeat](https://github.com/satriowaskitho/suricata/blob/master/README.md#9-instalasi-filebeat)
 
 ### System Requirements
 - OS	: Ubuntu 18.04 LTS
