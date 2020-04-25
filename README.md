@@ -10,11 +10,51 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 	
 	1.2 [Proses Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#12-proses-instalasi-ubuntu-1804-lts)
 	
-	1.3  [_Setting Up a Basic Firewall_](https://github.com/satriowaskitho/suricata/blob/master/README.md#13-setting-up-a-basic-firewall)
+	1.3  [Setting Up a Basic Firewall](https://github.com/satriowaskitho/suricata/blob/master/README.md#13-setting-up-a-basic-firewall)
 	 
 	1.5 [Configurasi  _Network Static IP Address_](https://github.com/satriowaskitho/suricata/blob/master/README.md#14--configurasi-network-static-ip-address)
 
-3. [Instalasi Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#2-instalasi-suricata) 
+2. [Instalasi Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#2-instalasi-suricata) 
+
+	2.1 [Instal Dependensi Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#21-instal-dependensi-suricata)
+
+	2.2 [Instal Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#22-instal-suricata)
+
+	2.3 [Konfigurasi Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#23-konfigurasi-suricata)
+
+	2.4 [Instal Suricata-Update](https://github.com/satriowaskitho/suricata/blob/master/README.md#24-instal-suricata-update)
+
+	2.5 [Mencari Sumber Rules Lain Yang Tersedia](https://github.com/satriowaskitho/suricata/blob/master/README.md#25-mencari-sumber-rules-lain-yang-tersedia)
+
+3. [Instalasi Java 8](https://github.com/satriowaskitho/suricata/blob/master/README.md#3-instalasi-java-8)
+
+	3.1 [Instal Java 8](https://github.com/satriowaskitho/suricata/blob/master/README.md#31-instal-java-8)
+
+	3.2 [Konfigurasi JAVA_HOME](https://github.com/satriowaskitho/suricata/blob/master/README.md#32-konfigurasi-java_home)
+
+4. [Instalasi Elasticsearch](https://github.com/satriowaskitho/suricata/blob/master/README.md#4-instalasi-elasticsearch)
+
+	4.1 [Instal Elasticsearch](https://github.com/satriowaskitho/suricata/blob/master/README.md#41-instal-elasticsearch)
+
+	4.2 [Konfigurasi Elasticsearch](https://github.com/satriowaskitho/suricata/blob/master/README.md#42-konfigurasi-elasticsearch)
+
+5. [Instalasi Kibana](https://github.com/satriowaskitho/suricata/blob/master/README.md#5-instalasi-kibana)
+
+	5.1 [Instal Kibana](https://github.com/satriowaskitho/suricata/blob/master/README.md#51-instal-kibana)
+
+	5.2 [Konfigurasi Kibana](https://github.com/satriowaskitho/suricata/blob/master/README.md#52-konfigurasi-kibana)
+
+	5.2 [Instal Template Kibana 6](https://github.com/satriowaskitho/suricata/blob/master/README.md#53-instal-template-kibana-6)
+
+6. [Instalasi Logstash](https://github.com/satriowaskitho/suricata/blob/master/README.md#6-instalasi-logstash)
+
+	6.1 [Instal Logstash](https://github.com/satriowaskitho/suricata/blob/master/README.md#61-instal-logstash)
+
+	6.2 [Download GeoLite2-City](https://github.com/satriowaskitho/suricata/blob/master/README.md#62-download-geolite2-city)
+
+	6.2 [Konfigurasi Logstash](https://github.com/satriowaskitho/suricata/blob/master/README.md#63-konfigurasi-logstash)
+
+	
 
 ### System Requirements
 - OS	: Ubuntu 18.04 LTS
@@ -645,7 +685,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	sudo systemctl enable logstash
 	```
 
-## 8. Tes Suricata
+## 7. Tes Suricata
 - _Turn Off Packages Offload_
 Ubah sesuai _network interface_ masing-masing.
 
@@ -666,7 +706,7 @@ Ubah sesuai _network interface_ masing-masing.
 	```bash
 	sudo /usr/bin/suricata -D -c /etc/suricata/suricata.yaml -i enp0s3
 	```
-## 9. Eksplorasi Dashboard Kibana
+## 8. Eksplorasi Dashboard Kibana
 Akses URL Kibana. Tunggu sampai _loading_ selesai.
 >http://[IP_Address_Server]:5601
 
@@ -681,5 +721,5 @@ Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila inst
 
 Selanjutnya, kalian bisa mencobanya satu-satu. Tidak semua dashboard dapat menvisualisasikan log karena tergantung jenis log yang masuk dan jenis rules yang dikonfigurasikan di Suricata.
 
-## 10. Instalasi Filebeat
+## 9. Instalasi Filebeat
 To be continue...
