@@ -83,8 +83,8 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 - **_Select start-up disk_**, pilih installer yang telah diunduh. Tunggu proses _booting_ selesai.
 - Pilih bahasa yang diinginkan. Pada tutorial ini, server menggunakan bahasa Inggris.
 - (Opsional) Bila ada saran _Installer update available_, pilih _'Update to new installer'_ dan tunggu proses _updating_.
-- **_Keyboard Configuration_**, bila dirasa sudah sesuai pilih _'Done'_.
-- **_Network Connetion_**, akan muncul _network interface_ (ex. enp0s3) dan IP Server. Keduanya akan digunakan pada instalasi Suricata, jadi tolong <ins>diingat dan dicatat</ins>. Bila sudah pilih _'Done'_.
+- **_Keyboard Configuration_**, bila dirasa sudah sesuai, pilih _'Done'_.
+- **_Network Connetion_**, akan muncul `network interface` (ex. enp0s3) dan `IP Address Server`. Keduanya akan digunakan pada instalasi Suricata, jadi tolong <ins>diingat</ins> ya folks. Bila sudah, pilih _'Done'_.
 
 	![](https://github.com/satriowaskitho/suricata/blob/master/images/103.png)
 
@@ -94,10 +94,15 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 - **_Storage configuration_**, pilih _'Done'_.
 - **_Confirm destructive action_**, bila telah yakin, pilih _'Continue'_.
 - **_Profile setup_**, tahap pengisian profil dan pembuatan _user_.
+	
 		- _Your name_, nama pembuat server.
+
 		- _Your server's name_, nama host server yang nantinya digunakan oleh server.
+
 		- _Username_ dan  _password_, digunakan untuk _login_ ke server.
+
 		- Bila semuanya telah terisi, pilih _'Done'_.
+
 
 - **_SSH Setup_**, pastikan _'Install OpenSSH server'_ telah terpilih (X). _'Import SSH Identity'_ dibiarkan terisi _'No'_. Lalu pilih _'Done'_.
 - **_Featured Server Snaps_**, lewati tahap ini dan langsung pilih _'Done'_. Tunggu proses instalasi selesai.
@@ -722,6 +727,8 @@ Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian ma
 Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila instalasi _template_ nya <ins>berhasil</ins> hehe. Untuk pertama kali, kalian bisa mencoba dashboard `SN-OVERVIEW`. Dashbord tersebut menampilkan banyak grafik dari aktifitas server yang dibaca oleh Suricata.
 
 Selanjutnya, kalian bisa mencoba dashboard tersebut satu per satu. Tidak semua dashboard dapat menvisualisasikan log karena tergantung jenis log yang masuk dan jenis rules yang dikonfigurasikan di Suricata.
+
+Eurekaaa~ :D
 
 ## 9. Instalasi Filebeat
 To be continue...
