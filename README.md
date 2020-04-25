@@ -110,7 +110,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	sudo nano /etc/netplan/01-netcfg.yaml
 	```
 
-	> Lalu isikan _file_ tersebut dengan konfigurasi di bawah. Ganti _IP Address_ dan _gateway4_ sesuai IP kalian. Tekan `Ctrl+S` untuk menyimpan dan `Ctrl+X` untuk keluar dari `nano`
+	> Lalu isikan _file_ tersebut dengan konfigurasi di bawah. Ganti `IP Address` dan `gateway4` sesuai IP kalian. Tekan `Ctrl+S` untuk menyimpan dan `Ctrl+X` untuk keluar dari `nano`
 		
 	```bash
 	network:
@@ -377,8 +377,14 @@ Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: 
 	}
 	```
 
-## 5. Instalasi Logstash
-### 5.1 Instal Logstash
+## 5. Instalasi Kibana
+
+You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
+
+### 5. Instal Template Kibana 6
+
+## 6. Instalasi Logstash
+### 6.1 Instal Logstash
 - Instal Logstash. Tunggu sampai proses instalasi selesai.
 
 	```bash
@@ -397,16 +403,38 @@ Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: 
 	sudo /usr/share/logstash/bin/logstash-plugin update
 	```
 
-### 5.2 Download GeoLiteCity
+### 6.2 Download GeoLiteCity
+- Masuk ke _directory_ `/usr/share/GeoIP` dengan _command_ di bawah.
 
+	```bash
+	cd /usr/share/GeoIP
+	```
 
-### 5.3 Konfigurasi Logstash
+- Lalu, unduh _database_ GeoLiteCity melalui link berikut.
+
+	```bash
+	sudo wget -N "https://mirrors-cdn.liferay.com/geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz"
+	```
+
+- Instal `xz-utils` untuk mengekstrak _file_ tersebut.
+
+	```bash
+	sudo apt install xz-utils
+	```
+
+- Kemudian, ekstrak _file_ tersebut.
+
+	```bash
+	sudo unxz GeoLiteCity.dat.xz
+	```
+
+### 6.3 Konfigurasi Logstash
 Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi konfigurasi _input_ sekaligus _output_.
 
 - Buat _file_ bernama `logstash.conf` dengan _command_ berikut.
 
 	```bash
-	nano /etc/logstash/conf.d/logstash.conf
+	sudo nano /etc/logstash/conf.d/logstash.conf
 	```
 	>Lalu, isi _file_ tersebut dengan konfigurasi di bawah ini.
 
@@ -493,7 +521,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	}
 	```
 
-- Tes konfigurasi Logstash.
+- Tes konfigurasi Logstash. Proses akan berlangsung agak lama. Tunggu sampai proses selesai.
 
 	```bash
 	sudo -u logstash /usr/share/logstash/bin/logstash --path.settings /etc/logstash -t
@@ -508,12 +536,4 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	```
 
 
-
-## 6. Instalasi Kibana
-
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
-
-## 7. Instalasi Template Kibana 6
-
 ## 8. Instalasi Filebeat
-
