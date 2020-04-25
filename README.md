@@ -3,7 +3,7 @@
 Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox), bismillah.
 
 ### Tabel of Content
-[System Requirement](https://github.com/satriowaskitho/suricata/blob/master/README.md#system-requirements)
+[System Requirements](https://github.com/satriowaskitho/suricata/blob/master/README.md#system-requirements)
 1. [ Instalasi Ubuntu 18.04 LTS di VM VirtualBox ](https://github.com/satriowaskitho/suricata/blob/master/README.md#1-instalasi-ubuntu-1804-lts-di-vm-virtualbox)  
 
 	1.1 [Persiapan Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#11-persiapan-instalasi-ubuntu-1804-lts) 
@@ -71,11 +71,11 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 
 	> [Ubuntu 18.04 LTS](http://releases.ubuntu.com/18.04.4/ubuntu-18.04.4-live-server-amd64.iso)
 
-- Buat '_Machine_' baru di VirtualBox. Set _virtual hard disk_ dengan ukuran 20 GB (Recommended).
-- Buka _Settings > Tab System_, ubah _Base Memory_ menjadi 4096 MB dan _Processor(s)_ menjadi 2 CPU.
+- Buat `Machine` baru di VirtualBox. Set `virtual hard disk` dengan ukuran 20 GB (Recommended).
+- Buka _Settings > Tab System_, ubah `Base Memory` menjadi 4096 MB dan `Processor(s)` menjadi 2 CPU.
 - Buka _Settings > Tab Storage_, arahkan _Controller: IDE > Empty_
 ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.	
-- Buka _Settings > Tab Network_, ubah _network adapter_ menjadi _Bridged Adapter_.
+- Buka _Settings > Tab Network_, ubah `network adapter` menjadi `Bridged Adapter`.
 - Jalankan Ubuntu Server.
 
 ### 1.2 Proses Instalasi Ubuntu 18.04 LTS
@@ -250,7 +250,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	```
 	> Tekan `Ctrl+S` untuk simpan, lalu `Ctrl+X` untuk keluar dari `nano`.
 
-- Sekarang, masuk ke file konfigurasi Suricata ke-2 dan ubah _network interface_ seperti cara sebelumnya.
+- Sekarang, masuk ke file konfigurasi Suricata lainnya dan ubah _network interface_ seperti cara sebelumnya.
 
 	```bash
 	$ sudo nano /etc/default/suricata
@@ -355,7 +355,7 @@ Suricata-update memerlukan _permission_ pada beberapa _directory_ tertentu.
 Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: Java 9 is not supported_.
 
 ### 3.1 Instal Java 8
--	Jalankan _commarnd_ berikut untuk menginstal java 8. Tunggu sampai proses instalasi selesai.
+-	Jalankan _command_ berikut untuk menginstal java 8. Tunggu sampai proses instalasi selesai.
 
 	```bash
 	sudo apt update
@@ -386,7 +386,7 @@ Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: 
 	JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/"
 	```
 
-- _Reload_ untuk menerapkan perubahan tersebut.
+- _Reload_ menggunakan _command_ di bawah untuk menerapkan perubahan tersebut.
 
 	```bash
 	source /etc/environment
@@ -562,7 +562,7 @@ server.host: "192.168.100.11"
 	sudo wget -N "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=6spQbiHDzaMYOcdt&suffix=tar.gz"
 	```
 
-- Ubah nama _file_ agar dapat mudah dibaca.
+- Masih di _directory_ yang sama. Ubah nama _file_ agar dapat mudah dibaca.
 
 	```bash
 	sudo mv 'geoip_download?edition_id=GeoLite2-City&license_key=6spQbiHDzaMYOcdt&suffix=tar.gz' GeoLite2-City.tar.gz
@@ -721,7 +721,7 @@ Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian ma
 
 Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila instalasi _template_ nya <ins>berhasil</ins> hehe. Untuk pertama kali, kalian bisa mencoba dashboard `SN-OVERVIEW`. Dashbord tersebut menampilkan banyak grafik dari aktifitas server yang dibaca oleh Suricata.
 
-Selanjutnya, kalian bisa mencobanya satu-satu. Tidak semua dashboard dapat menvisualisasikan log karena tergantung jenis log yang masuk dan jenis rules yang dikonfigurasikan di Suricata.
+Selanjutnya, kalian bisa mencoba dashboard tersebut satu per satu. Tidak semua dashboard dapat menvisualisasikan log karena tergantung jenis log yang masuk dan jenis rules yang dikonfigurasikan di Suricata.
 
 ## 9. Instalasi Filebeat
 To be continue...
