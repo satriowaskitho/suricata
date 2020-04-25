@@ -537,7 +537,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	```bash
 	input {
 	  file {
-	    path => ["/var/log/suricata/*.json"]
+	    path => ["/var/log/suricata/eve.json"]
 	    sincedb_path => ["/var/lib/logstash/sincedb"]
 	    codec => json
 	    type => "SELKS"
@@ -601,14 +601,14 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	output {
 	  if [event_type] and [event_type] != 'stats' {
 	    elasticsearch {
-	      hosts => "127.0.0.1"
+	      hosts => localhost
 	      index => "logstash-%{event_type}-%{+YYYY.MM.dd}"
 	      template_overwrite => true
 	      template => "/etc/logstash/elasticsearch6-template.json"
 	    }
 	  } else {
 	    elasticsearch {
-	      hosts => "127.0.0.1"
+	      hosts => localhost
 	      index => "logstash-%{+YYYY.MM.dd}"
 	      template_overwrite => true
 	      template => "/etc/logstash/elasticsearch6-template.json"
