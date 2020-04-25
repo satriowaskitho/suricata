@@ -499,29 +499,35 @@ server.host: "192.168.100.11"
 	sudo /usr/share/logstash/bin/logstash-plugin update
 	```
 
-### 6.2 Download GeoLiteCity
+### 6.2 Download GeoLite2-City
 - Masuk ke _directory_ `/usr/share/GeoIP` dengan _command_ di bawah.
 
 	```bash
 	cd /usr/share/GeoIP
 	```
 
-- Lalu, unduh _database_ GeoLiteCity melalui link berikut.
+- Lalu, unduh _database_ GeoLite2-City melalui link berikut.
 
 	```bash
-	sudo wget -N "https://mirrors-cdn.liferay.com/geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.xz"
+	sudo wget -N "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=6spQbiHDzaMYOcdt&suffix=tar.gz"
 	```
 
-- Instal `xz-utils` untuk mengekstrak _file_ tersebut.
+- Ubah nama _file_ agar dapat mudah dibaca.
 
 	```bash
-	sudo apt install xz-utils
+	sudo mv 'geoip_download?edition_id=GeoLite2-City&license_key=6spQbiHDzaMYOcdt&suffix=tar.gz' GeoLite2-City.tar.gz
 	```
 
 - Kemudian, ekstrak _file_ tersebut.
 
 	```bash
-	sudo unxz GeoLiteCity.dat.xz
+	sudo tar -zxvf GeoLite2-City.tar.gz
+	```
+
+- Pindahkan _file_ `GeoLite-City.mmdb`  ke _directory_ `/usr/share/GeoIP`.
+
+	```bash
+	sudo mv /usr/share/GeoIP/GeoLite2-City_20200421/GeoLite2-City.mmdb /usr/share/GeoIP
 	```
 
 ### 6.3 Konfigurasi Logstash
@@ -582,7 +588,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	    geoip {
 	      source => "src_ip"
 	      target => "geoip"
-	      database => "/usr/share/GeoIP/GeoLiteCity.dat"
+	      database => "/usr/share/GeoIP/GeoLite2-City.mmdb"
 	      add_field => [ "[geoip][coordinates]", "%{[geoip][longitude]}" ]
 	      add_field => [ "[geoip][coordinates]", "%{[geoip][latitude]}" ]
 	    }
@@ -591,7 +597,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	    geoip {
 	      source => "dest_ip"
 	      target => "geoip"
-	      database => "/usr/share/GeoIP/GeoLiteCity.dat"
+	      database => "/usr/share/GeoIP/GeoLite2-City.mmdb"
 	      add_field => [ "[geoip][coordinates]", "%{[geoip][longitude]}" ]
 	      add_field => [ "[geoip][coordinates]", "%{[geoip][latitude]}" ]
 	    }
@@ -652,5 +658,7 @@ Ubah sesuai _network interface_ masing-masing.
 	```bash
 	sudo /usr/bin/suricata -D -c /etc/suricata/suricata.yaml -i enp0s3
 	```
+## 9. Eksplorasi Dashboard Kibana
 
-## 9. Instalasi Filebeat
+
+## 10. Instalasi Filebeat
