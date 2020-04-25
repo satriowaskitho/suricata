@@ -4,11 +4,11 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 
 ### Tabel of Content
 
-1.  [ Instalasi Ubuntu 18.04 LTS di VM VirtualBox ](https://github.com/satriowaskitho/suricata/blob/master/README.md#1-instalasi-ubuntu-1804-lts-di-vm-virtualbox)  
-	1.1 [Persiapan Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#11-persiapan-instalasi-ubuntu-1804-lts) 
-	1.2 [Proses Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#12-proses-instalasi-ubuntu-1804-lts)
-	1.3  [_Setting Up a Basic Firewall_](https://github.com/satriowaskitho/suricata/blob/master/README.md#13-setting-up-a-basic-firewall)
-	1.4 [Configurasi  _Network Static IP Address_](https://github.com/satriowaskitho/suricata/blob/master/README.md#14--configurasi-network-static-ip-address)
+1. [ Instalasi Ubuntu 18.04 LTS di VM VirtualBox ](https://github.com/satriowaskitho/suricata/blob/master/README.md#1-instalasi-ubuntu-1804-lts-di-vm-virtualbox)  
+	11. [Persiapan Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#11-persiapan-instalasi-ubuntu-1804-lts) 
+	12. [Proses Instalasi Ubuntu 18.04 LTS](https://github.com/satriowaskitho/suricata/blob/master/README.md#12-proses-instalasi-ubuntu-1804-lts)
+	13.  [_Setting Up a Basic Firewall_](https://github.com/satriowaskitho/suricata/blob/master/README.md#13-setting-up-a-basic-firewall)
+	14. [Configurasi  _Network Static IP Address_](https://github.com/satriowaskitho/suricata/blob/master/README.md#14--configurasi-network-static-ip-address)
 2. [Instalasi Suricata](https://github.com/satriowaskitho/suricata/blob/master/README.md#2-instalasi-suricata) 
 
 ### System Requirements
