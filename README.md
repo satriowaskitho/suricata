@@ -82,31 +82,31 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 
 - **_Select start-up disk_**, pilih installer yang telah diunduh. Tunggu proses _booting_ selesai.
 - Pilih bahasa yang diinginkan. Pada tutorial ini, server menggunakan bahasa Inggris.
-- (Opsional) Bila ada saran _Installer update available_, pilih _'Update to new installer'_ dan tunggu proses _updating_.
-- **_Keyboard Configuration_**, bila dirasa sudah sesuai, pilih _'Done'_.
-- **_Network Connetion_**, akan muncul `network interface` (ex. enp0s3) dan `IP Address Server`. Keduanya akan digunakan pada instalasi Suricata, jadi tolong <ins>diingat</ins> ya folks. Bila sudah, pilih _'Done'_.
+- (Opsional) Bila ada saran **_Installer update available_**, pilih `Update to new installer` dan tunggu proses _updating_.
+- **_Keyboard Configuration_**, bila dirasa sudah sesuai, pilih `Done`.
+- **_Network Connetion_**, akan muncul `network interface` (ex. enp0s3) dan `IP Address Server`. Keduanya akan digunakan pada instalasi Suricata, jadi tolong <ins>diingat</ins> ya folks. Bila sudah, pilih `Done`.
 
 	![](https://github.com/satriowaskitho/suricata/blob/master/images/103.png)
 
-- **_Configure Proxy_**, kosongkan saja dan langsung pilih _'Done'_.
-- **_Configure Ubuntu archive mirror_**, tidak perlu diubah. Lalu pilih _'Done'_.
-- **_Guided storage configuration_**, pastikan _'use an entire disk'_ telah terpilih (X). Lalu pilih _'Done'_.
-- **_Storage configuration_**, pilih _'Done'_.
-- **_Confirm destructive action_**, bila telah yakin, pilih _'Continue'_.
+- **_Configure Proxy_**, kosongkan saja dan langsung pilih `Done`.
+- **_Configure Ubuntu archive mirror_**, tidak perlu diubah. Lalu pilih `Done`.
+- **_Guided storage configuration_**, pastikan `use an entire disk` telah terpilih (X). Lalu pilih `Done`.
+- **_Storage configuration_**, pilih `Done`.
+- **_Confirm destructive action_**, bila telah yakin, pilih `Continue`.
 - **_Profile setup_**, tahap pengisian profil dan pembuatan _user_.
-	
-		- _Your name_, nama pembuat server.
 
-		- _Your server's name_, nama host server yang nantinya digunakan oleh server.
+	- `Your name`, nama pembuat server.
 
-		- _Username_ dan  _password_, digunakan untuk _login_ ke server.
+	- `Your server's name`, nama host server yang nantinya digunakan oleh server.
 
-		- Bila semuanya telah terisi, pilih _'Done'_.
+	- `Username` dan  `password`, digunakan untuk _login_ ke server.
+
+	- Bila semuanya telah terisi, pilih `Done`.
 
 
-- **_SSH Setup_**, pastikan _'Install OpenSSH server'_ telah terpilih (X). _'Import SSH Identity'_ dibiarkan terisi _'No'_. Lalu pilih _'Done'_.
-- **_Featured Server Snaps_**, lewati tahap ini dan langsung pilih _'Done'_. Tunggu proses instalasi selesai.
-- **_Installation Complete!_**, pilih _Reboot_. Tunggu proses _reboot_ selesai, bila telah selesai maka akan muncul _command_:
+- **_SSH Setup_**, pastikan `Install OpenSSH server` telah terpilih (X). `Import SSH Identity` dibiarkan terisi `No`. Lalu pilih `Done`.
+- **_Featured Server Snaps_**, lewati tahap ini dan langsung pilih `Done`. Tunggu proses instalasi selesai.
+- **_Installation Complete!_**, pilih `Reboot`. Tunggu proses _reboot_ selesai, bila telah selesai maka akan muncul _command_:
 
 	```bash
 	Ubuntu 18.04 LTS tty1
@@ -114,23 +114,23 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	[nama_host_server] login:
 	```
 	
-- Silakan login menggunakan _username_ yang telah dibuat sebelumnya.
+- Silakan login menggunakan `username` yang telah dibuat sebelumnya.
 
 ### 1.3 _Setting Up a Basic Firewall_
 
-- Untuk memastikan _firewall_ mengizinkan koneksi SSH maka kita perlu mengizinkan OpenSSH. Jalankan _command_ berikut:
+- Untuk memastikan _firewall_ mengizinkan koneksi SSH, maka kita perlu mengizinkan OpenSSH. Jalankan _command_ berikut:
 
 	```bash
 	$ sudo ufw allow OpenSSH
 	```
 	
-- Kemudian aktifkan _firewall_:
+- Kemudian aktifkan _firewall_.
 
 	```bash
 	$ sudo ufw enable
 	```
 
-- Untuk memeriksa statusnya:
+- Untuk memeriksa statusnya.
 
 	```bash
 	$ sudo ufw status
@@ -147,7 +147,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	```
 
 - Untuk memudahkan proses kedepannya, silakan _login_ ke server melalui PuTTY dengan mengakses `Port 22` dan `IP Address server` kalian.
-- Bila ingin memeriksa IP Address jalankan _command_:
+- Bila ingin memeriksa `IP Address` jalankan _command_:
 
 	```bash
 	$ ifconfig -a
@@ -156,7 +156,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	![](https://github.com/satriowaskitho/suricata/blob/master/images/104.png)
 
 
-	> IP Address berada di depan _'inet'_ pada tiap _network interface_ (ex. enp0s3).
+	> `IP Address` berada di depan `inet` pada tiap `network interface` (ex. <ins>enp0s3</ins>).
 
 ### 1.4  Configurasi _Network Static IP Address_
 - Buat file baru bernama `01-netcfg.yaml` dengan _command_ berikut:
@@ -203,7 +203,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 
 ### 2.2 Instal Suricata
 
-- Jalankan _command_ berikut, tekan [Enter] saat ada perizinan:
+- Jalankan _command_ berikut, tekan `[Enter]` saat ada perizinan:
 
 	```bash
 	sudo apt-get install software-properties-common
@@ -219,7 +219,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 
 ### 2.3 Konfigurasi Suricata
 
-- Sebelum itu pastikan kalian masih mengingat _network interface_ kalian. Untuk memeriksanya kembali jalankan _command_:
+- Sebelum itu pastikan kalian masih mengingat `network interface` kalian. Untuk memeriksanya kembali, jalankan _command_:
 
 	```bash
 	$ sudo nano /etc/netplan/50-cloud-init.yaml
@@ -243,7 +243,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 
 	> - Tekan, `Alt+R`. 
 	> - **_Search to (Replace)_**, masukan 'eth0'.
-	> - **_Replace with_**, masukan _network interface_ kalian (ex. enp0s3).
+	> - **_Replace with_**, masukan _network interface_ kalian (ex. <ins>enp0s3</ins>).
 	> - Tekan, 'A' pada _keyboard_ untuk _replace all_.
 	> - Kurang lebih akan ada 9 kata yang diubah.
 	> - Tekan `Ctrl+S` untuk simpan.
@@ -542,7 +542,7 @@ server.host: "192.168.100.11"
 	sudo apt -y install logstash
 	```
 
-- Pastikan Logstash dapat membaca _log file_.
+- Pastikan Logstash dapat membaca _log file_ dengan menjalankan _command_ berikut.
 
 	```bash
 	sudo usermod -a -G adm logstash
@@ -593,7 +593,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	```bash
 	sudo nano /etc/logstash/conf.d/logstash.conf
 	```
-	>Lalu, isi _file_ tersebut dengan konfigurasi di bawah ini.
+	>Lalu, isi _file_ tersebut dengan konfigurasi di bawah ini. Tekan `Shift+Insert` untuk _paste_ ke `nano`.
 
 	```bash
 	input {
@@ -693,7 +693,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	```
 
 ## 7. Tes Suricata
-- _Turn Off Packages Offload_
+- **_Turn Off Packages Offload_**
 Ubah sesuai _network interface_ masing-masing.
 
 	```bash
@@ -724,7 +724,7 @@ Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian ma
 
 ![](https://github.com/satriowaskitho/suricata/blob/master/images/901.png)
 
-Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila instalasi _template_ nya <ins>berhasil</ins> hehe. Untuk pertama kali, kalian bisa mencoba dashboard `SN-OVERVIEW`. Dashbord tersebut menampilkan banyak grafik dari aktifitas server yang dibaca oleh Suricata.
+Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila instalasi _template_ nya <ins>berhasil</ins> hehe. Karena baru pertama kali, kalian bisa mencoba dashboard `SN-OVERVIEW`. Dashbord tersebut menampilkan banyak grafik dari aktifitas server yang dibaca oleh Suricata.
 
 Selanjutnya, kalian bisa mencoba dashboard tersebut satu per satu. Tidak semua dashboard dapat menvisualisasikan log karena tergantung jenis log yang masuk dan jenis rules yang dikonfigurasikan di Suricata.
 
