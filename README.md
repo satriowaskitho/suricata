@@ -71,7 +71,8 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 ### 2.1 Instal Dependensi Suricata
 ```bash
 sudo apt-get install libpcre3 libpcre3-dbg libpcre3-dev build-essential libpcap-dev   \
-				libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \
-				libcap-ng-dev libcap-ng0 make libmagic-dev libjansson-dev        \
-				libnss3-dev libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \
-				python-yaml rustc cargo
+			libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \
+			libcap-ng-dev libcap-ng0 make libmagic-dev libjansson-dev        \
+			libnss3-dev libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \
+			python-yaml rustc cargo
+```
