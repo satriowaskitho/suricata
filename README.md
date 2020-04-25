@@ -21,7 +21,7 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 
 	> [Ubuntu 18.04 LTS](http://releases.ubuntu.com/18.04.4/ubuntu-18.04.4-live-server-amd64.iso)
 
-- Buat '_Machine_' baru di VirtualBox.
+- Buat '_Machine_' baru di VirtualBox. Set _virtual hard disk_ dengan ukuran 20 GB (Recommended).
 - Buka _Settings > Tab System_, ubah _Base Memory_ menjadi 4096 MB dan _Processor(s)_ menjadi 2 CPU.
 - Buka _Settings > Tab Storage_, arahkan _Controller: IDE > Empty_
 ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.	
@@ -91,7 +91,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	OpenSSH (v6)               ALLOW       Anywhere (v6)
 	```
 
-- Untuk memudahkan proses kedepannya, silakan _login_ ke server melalui PuttY dengan mengakses <ins>Port 22</ins> dan <ins>IP Address server</ins> yang sebelumnya telah dicatat.
+- Untuk memudahkan proses kedepannya, silakan _login_ ke server melalui PuTTY dengan mengakses `Port 22` dan `IP Address server` kalian.
 - Bila ingin memeriksa IP Address jalankan _command_:
 
 	```bash
@@ -102,6 +102,34 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 
 
 	> IP Address berada di depan _'inet'_ pada tiap _network interface_ (ex. enp0s3).
+
+### 1.4  Configurasi _Network Static IP Address_
+- Buat file baru bernama `01-netcfg.yaml` dengan _command_ berikut:
+
+	```bash
+	sudo nano /etc/netplan/01-netcfg.yaml
+	```
+
+	> Lalu isikan _file_ tersebut dengan konfigurasi di bawah. Ganti _IP Address_ dan _gateway4_ sesuai IP kalian. Tekan `Ctrl+S` untuk menyimpan dan `Ctrl+X` untuk keluar dari `nano`
+		
+	```bash
+	network:
+	  version: 2
+	  renderer: networkd
+	  ethernets:
+	    enp0s3:
+	      dhcp4: no
+	      addresses: [192.168.100.11/24]
+	      gateway4:  192.168.100.1
+	      nameservers:
+	        addresses: [8.8.8.8, 8.8.4.4]
+	```
+
+- Kemudian, terapkan konfigurasi tersebut dengan _command_ berikut.
+
+	```bash
+	sudo netplan apply
+	```
 
 
 ## 2. Instalasi Suricata
@@ -158,17 +186,19 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	$ sudo nano /etc/suricata/suricata.yaml
 	```
 
-	> - Tekan, Alt+R. 
+	> - Tekan, `Alt+R`. 
 	> - **_Search to (Replace)_**, masukan 'eth0'.
 	> - **_Replace with_**, masukan _network interface_ kalian (ex. enp0s3).
 	> - Tekan, 'A' pada _keyboard_ untuk _replace all_.
 	> - Kurang lebih akan ada 9 kata yang diubah.
+	> - Tekan `Ctrl+S` untuk simpan.
 
 - Masih pada file yang sama, ubah `HOME_NET` yang berada di `address-groups` menjadi _IP Address_ dari server kalian. Misalnya:
 
 	```bash
 	HOME_NET: "[192.168.100.11/24]"
 	```
+	> Tekan `Ctrl+S` untuk simpan, lalu `Ctrl+X` untuk keluar dari `nano`.
 
 - Sekarang, masuk ke file konfigurasi Suricata ke-2 dan ubah _network interface_ seperti cara sebelumnya.
 
@@ -176,11 +206,12 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	$ sudo nano /etc/default/suricata
 	```
 
-	> - Tekan, Alt+R. 
+	> - Tekan, `Alt+R`. 
 	> - **_Search to (Replace)_**, masukan 'eth0'.
 	> - **_Replace with_**, masukan _network interface_ kalian (ex. enp0s3).
 	> - Tekan 'A' pada _keyboard_ untuk _replace all_.
 	> - Hanya akan ada 1 kata yang diubah.
+	> - Tekan `Ctrl+S` untuk simpan, lalu `Ctrl+X` untuk keluar.
 
 ### 2.4 Instal Suricata-Update
 Suricata-update digunakan untuk memudahkan dalam pengelolaan _rules_ yang akan digunakan Suricata.
@@ -188,7 +219,7 @@ Suricata-update digunakan untuk memudahkan dalam pengelolaan _rules_ yang akan d
 - Jalankan _command_ berikut dan tunggu hingga proses instalasi selesai.
 
 	```bash
-	sudo apt-get -y install python-pip
+	sudo apt -y install python-pip
 	sudo pip install pyyaml
 	sudo pip install https://github.com/OISF/suricata-update/archive/master.zip
 	```
@@ -232,7 +263,7 @@ Suricata-update memerlukan _permission_ pada beberapa _directory_ tertentu.
 	sudo chmod -R g+rw /var/lib/suricata/update
 	```
 
-	>Sekarang tambahan _username_ kalian ke grup tadi.
+	>Sekarang tambahkan _username_ kalian ke grup tadi.
 	```bash
 	sudo usermod -a -G suricata [username_kalian]
 	```
@@ -269,3 +300,220 @@ Suricata-update memerlukan _permission_ pada beberapa _directory_ tertentu.
 	```bash
 	sudo suricata-update list-enabled-sources
 	```
+
+## 3. Instalasi Java 8
+Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: Java 9 is not supported_.
+
+-	Jalankan _commarnd_ berikut untuk menginstal java 8. Tunggu sampai proses instalasi selesai.
+
+	```bash
+	sudo apt update
+	sudo apt install -y openjdk-8-jdk wget apt-transport-https
+	```
+
+- Cek java _version_.
+
+	```bash
+	$ java -version
+	```
+	>Output:
+	```bash
+	openjdk version "1.8.0_252"
+	OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
+	OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
+	```
+
+## 4. Instalasi Elasticsearch
+
+- Dimulai dengan mengimport _Elasticsearch public GPG key_ ke dalam APT. Bila sukses akan muncul _feedback_ _'OK'_.
+
+	```bash
+	sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+	```
+
+- Lalu, menambahkan list _source_ dari Elastic ke `sources.list.d` _directory_, dimana APT akan melihat _source_ baru di sana. Tutorial ini akan menggunakan Elastic versi 6.x
+
+	```bash
+	echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+	```
+
+- _Update_ daftar _package_ sehingga APT dapat membaca _source_ yang baru ditambahkan. Kemudian instal Elasticsearch.
+
+	```bash
+	sudo apt update
+	sudo apt -y install elasticsearch
+	```
+
+- Jalankan dan perbolehkan Elasticsearch _start_ otomatis ketika server dihidupkan.
+
+	```bash
+	sudo systemctl start elasticsearch
+	sudo systemctl enable elasticsearch
+	```
+
+- Tes apakah Elasticsearch telah berjalan dengan baik.
+
+	```bash
+	$ curl -X GET "localhost:9200"
+	```
+	>Contoh output yang benar:
+	```bash
+	{
+	  "name" : "KlUlyyn",
+	  "cluster_name" : "elasticsearch",
+	  "cluster_uuid" : "UkzubFEpRue6sQj-mCFHGQ",
+	  "version" : {
+	    "number" : "6.8.8",
+	    "build_flavor" : "default",
+	    "build_type" : "deb",
+	    "build_hash" : "2f4c224",
+	    "build_date" : "2020-03-18T23:22:18.622755Z",
+	    "build_snapshot" : false,
+	    "lucene_version" : "7.7.2",
+	    "minimum_wire_compatibility_version" : "5.6.0",
+	    "minimum_index_compatibility_version" : "5.0.0"
+	  },
+	  "tagline" : "You Know, for Search"
+	}
+	```
+
+## 5. Instalasi Logstash
+### 5.1 Instal Logstash
+- Instal Logstash. Tunggu sampai proses instalasi selesai.
+
+	```bash
+	sudo apt -y install logstash
+	```
+
+- Pastikan Logstash dapat membaca _log file_.
+
+	```bash
+	sudo usermod -a -G adm logstash
+	```
+
+- _Update plugin_  Logstash dengan menjalankan _command_ di bawah. Proses akan cenderung lama. Tunggu sampai proses selesai.
+
+	```bash
+	sudo /usr/share/logstash/bin/logstash-plugin update
+	```
+
+### 5.2 Download GeoLiteCity
+
+
+### 5.3 Konfigurasi Logstash
+Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi konfigurasi _input_ sekaligus _output_.
+
+- Buat _file_ bernama `logstash.conf` dengan _command_ berikut.
+
+	```bash
+	nano /etc/logstash/conf.d/logstash.conf
+	```
+	>Lalu, isi _file_ tersebut dengan konfigurasi di bawah ini.
+
+	```bash
+	input {
+	  file {
+	    path => ["/var/log/suricata/*.json"]
+	    sincedb_path => ["/var/lib/logstash/sincedb"]
+	    codec => json
+	    type => "SELKS"
+	  }
+	}
+
+	filter {
+	  if [type] == "SELKS" {
+	    date {
+	      match => [ "timestamp", "ISO8601" ]
+	    }
+	    ruby {
+	      code => "
+	        if event.get('[event_type]') == 'fileinfo'
+	          event.set('[fileinfo][type]', event.get('[fileinfo][magic]').to_s.split(',')[0])
+	        end
+	      "
+	    }
+	    ruby {
+	      code => "
+	        if event.get('[event_type]') == 'alert'
+	          sp = event.get('[alert][signature]').to_s.split(' group ')
+	          if (sp.length == 2) and /\A\d+\z/.match(sp[1])
+	            event.set('[alert][signature]', sp[0])
+	          end
+	        end
+	      "
+	    }
+	    metrics {
+	      meter => [ "eve_insert" ]
+	      add_tag => "metric"
+	      flush_interval => 30
+	    }
+	  }
+	  if [http] {
+	    useragent {
+	      source => "[http][http_user_agent]"
+	      target => "[http][user_agent]"
+	    }
+	  }
+	  if [src_ip] {
+	    geoip {
+	      source => "src_ip"
+	      target => "geoip"
+	      database => "/usr/share/GeoIP/GeoLiteCity.dat"
+	      add_field => [ "[geoip][coordinates]", "%{[geoip][longitude]}" ]
+	      add_field => [ "[geoip][coordinates]", "%{[geoip][latitude]}" ]
+	    }
+	  }
+	  if [dest_ip] {
+	    geoip {
+	      source => "dest_ip"
+	      target => "geoip"
+	      database => "/usr/share/GeoIP/GeoLiteCity.dat"
+	      add_field => [ "[geoip][coordinates]", "%{[geoip][longitude]}" ]
+	      add_field => [ "[geoip][coordinates]", "%{[geoip][latitude]}" ]
+	    }
+	  }
+	}
+
+	output {
+	  if [event_type] and [event_type] != 'stats' {
+	    elasticsearch {
+	      hosts => "127.0.0.1"
+	      index => "logstash-%{event_type}-%{+YYYY.MM.dd}"
+	      template_overwrite => true
+	      template => "/etc/logstash/elasticsearch6-template.json"
+	    }
+	  } else {
+	    elasticsearch {
+	      hosts => "127.0.0.1"
+	      index => "logstash-%{+YYYY.MM.dd}"
+	      template_overwrite => true
+	      template => "/etc/logstash/elasticsearch6-template.json"
+	    }
+	  }
+	}
+	```
+
+- Tes konfigurasi Logstash.
+
+	```bash
+	sudo -u logstash /usr/share/logstash/bin/logstash --path.settings /etc/logstash -t
+	```
+	>Jika tidak ada _errror_, maka _output_ akan menampilkan `Configuration OK`
+
+- Jalankan dan perbolehkan Logstash _start_ otomatis ketika server dihidupkan.
+
+	```bash
+	sudo systemctl start logstash
+	sudo systemctl enable logstash
+	```
+
+
+
+## 6. Instalasi Kibana
+
+You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
+
+## 7. Instalasi Template Kibana 6
+
+## 8. Instalasi Filebeat
+
