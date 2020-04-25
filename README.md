@@ -15,7 +15,7 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 - Network : Bridged Adapter (VM VirtualBox)
 
 ## 1. Instalasi Ubuntu 18.04 LTS di VM VirtualBox
-### Persiapan Instalasi Ubuntu 18.04 LTS
+### 1.1 Persiapan Instalasi Ubuntu 18.04 LTS
 - Download installer Ubuntu 18.04 LTS
 	> [Ubuntu 18.04 LTS](http://releases.ubuntu.com/18.04.4/ubuntu-18.04.4-live-server-amd64.iso)
 - Buat '_Machine_' baru di VirtualBox.
@@ -24,7 +24,7 @@ Dikolaborasikan dengan ELK v6.x dan Filebeat di Ubuntu 18.04 LTS (VM VirtualBox)
 ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.	
 - Buka _Settings > Tab Network_, ubah _network adapter_ menjadi _Bridged Adapter_.
 - Jalankan Ubuntu Server.
-### Proses Instalasi Ubuntu 18.04 LTS
+### 1.2 Proses Instalasi Ubuntu 18.04 LTS
 - **_Select start-up disk_**, pilih installer yang telah diunduh.
 - Tunggu proses _booting_ selesai.
 - Pilih bahasa yang diinginkan. Pada tutorial ini, server menggunakan bahasa Inggris.
@@ -45,3 +45,33 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 - **_SSH Setup_**, pastikan _'Install OpenSSH server'_ telah terpilih (X). _'Import SSH Identity'_ dibiarkan terisi _'No'_. Lalu pilih _'Done'_.
 - **_Featured Server Snaps_**, lewati tahap ini dan langsung pilih _'Done'_.
 - Tunggu proses instalasi selesai.
+- **_Installation Complete!_**, pilih _Reboot_.
+- Tunggu proses _reboot_ selesai, bila telah selesai maka akan muncul _command_:
+	```bash
+	Ubuntu 18.04 LTS tty1
+
+	[nama_host_server] login:
+	```
+- Silakan login menggunakan _username_ yang telah dibuat sebelumnya.
+
+### 1.3 Konfigurasi _Network Static IP Address_ di Ubuntu 18.04 LTS
+- Untuk memudahkan proses kedepannya, silakan _login_ ke server melalui PuttY dengan mengakses <ins>Port 22</ins> dan <ins>IP Address server</ins> yang sebelumnya telah dicatat.
+- Bila ingin memeriksa IP Address jalankan _command_:
+	```bash
+	$ ifconfig -a
+	```
+	![](https://github.com/satriowaskitho/suricata/blob/master/images/104.png)
+
+
+	> IP Address berada di depan _'inet'_ pada tiap _network interface_ (ex. enp0s3).
+-
+
+## 2. Instalasi Suricata
+
+### 2.1 Instal Dependensi Suricata
+```bash
+sudo apt-get install libpcre3 libpcre3-dbg libpcre3-dev build-essential libpcap-dev   \
+				libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \
+				libcap-ng-dev libcap-ng0 make libmagic-dev libjansson-dev        \
+				libnss3-dev libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \
+				python-yaml rustc cargo
