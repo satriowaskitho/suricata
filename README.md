@@ -66,10 +66,33 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	> IP Address berada di depan _'inet'_ pada tiap _network interface_ (ex. enp0s3).
 -
 
+### 1.4 _Setting Up a Basic Firewall_
+- Untuk memastikan _firewall_ mengizinkan koneksi SSH maka kita perlu mengizinkan OpenSSH. Jalankan _command_ berikut:
+	```bash
+	$ sudo ufw allow OpenSSH
+	```
+- Kemudian aktifkan _firewall_:
+	```bash
+	$ sudo ufw enable
+	```
+- Untuk memeriksa statusnya:
+	```bash
+	$ sudo ufw status
+	```
+	> Output:
+	```bash
+	Status: active
+
+	To                         Action      From
+	--                         ------      ----
+	OpenSSH                    ALLOW       Anywhere
+	OpenSSH (v6)               ALLOW       Anywhere (v6)
+	```
+
 ## 2. Instalasi Suricata
 
 ### 2.1 Instal Dependensi Suricata
-- Jalankan _command_ berikut:
+- Jalankan _command_ berikut. Tunggu sampai proses instalasi selesai.
 	```bash
 	sudo apt-get -y install libpcre3 libpcre3-dbg libpcre3-dev build-essential libpcap-dev   \
 	                libnet1-dev libyaml-0-2 libyaml-dev pkg-config zlib1g zlib1g-dev \
@@ -77,4 +100,52 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	                libnss3-dev libgeoip-dev liblua5.1-dev libhiredis-dev libevent-dev \
 	                python-yaml rustc cargo
 	```
-- Tunggu sampai proses instalasi selesai.
+
+### 2.2 Instal Suricata
+- Jalankan _command_ berikut, tekan [Enter] saat ada perizinan:
+	```bash
+	sudo apt-get install software-properties-common
+	sudo add-apt-repository ppa:oisf/suricata-stable
+	sudo apt-get update	
+	```
+- Kemudian, instal  Suricata dan tunggu proses instalasi:
+	```bash
+	sudo apt-get -y install suricata
+	```
+
+### 2.3 Konfigurasi Suricata
+- Sebelum itu pastikan kalian masih mengingat _network interface_ kalian. Untuk memeriksanya kembali jalankan _command_:
+	```bash
+	$ sudo nano /etc/netplan/50-cloud-init.yaml
+	```
+	> Output:
+	```bash
+	network: 
+		ethernets: 
+			enp0s3:
+				dhcp4: true
+		version: 2
+	```
+	> Pada output tersebut, <ins>enp0s3</ins> merupakan _network interface_.
+- Kemudian, masuk ke file konfigurasi suricata dan **ubah/replace** semua `eth0` menjadi _network interface_ kalian.  Pada tutorial ini, `eth0` akan di-_replace_ menjadi `enp0s3`.
+	```bash
+	$ sudo nano /etc/suricata/suricata.yaml
+	```
+	> - Tekan, Alt+R. 
+	> - **_Search to (Replace)_**, masukan 'eth0'.
+	> - **_Replace with_**, masukan _network interface_ kalian (ex. enp0s3).
+	> - Tekan, 'A' pada _keyboard_ untuk _replace all_.
+	> - Kurang lebih akan ada 9 kata yang diubah.
+- Masih pada file yang sama, ubah `HOME_NET` yang berada di `address-groups` menjadi _IP Address_ dari server kalian. Misalnya:
+	```bash
+	HOME_NET: "[192.168.100.11/24]"
+	```
+- Sekarang, masuk ke file konfigurasi Suricata ke-2 dan ubah _network interface_ seperti cara sebelumnya.
+	```bash
+	$ sudo nano /etc/default/suricata
+	```
+	> - Tekan, Alt+R. 
+	> - **_Search to (Replace)_**, masukan 'eth0'.
+	> - **_Replace with_**, masukan _network interface_ kalian (ex. enp0s3).
+	> - Tekan 'A' pada _keyboard_ untuk _replace all_.
+	> - Hanya akan ada 1 kata yang diubah.
