@@ -659,6 +659,16 @@ Ubah sesuai _network interface_ masing-masing.
 	sudo /usr/bin/suricata -D -c /etc/suricata/suricata.yaml -i enp0s3
 	```
 ## 9. Eksplorasi Dashboard Kibana
+Akses URL Kibana kalian. Tunggu sampai _loading_ selesai.
+>http://[IP_Address_Server]:5601
+
+Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian masuk ke dashboard Kibana. Maka kalian akan diminta untuk memilih `default index`.
+- Pilih `logstash-*`, tepat berada di bawah tombol `Create Index Pattern`.
+- Lalu, buat indeks tersebut menjadi `default` dengan cara klik tombol `bintang` . Tombol tersebut berada di kanan atas, sejajar dengan tombol `refresh` dan `remove`.
+- Setelah itu, kalian akan diarahkan ke tampilan tab `decover` yang sebenarnya. Bila terdapat @timestamp _barchart_ beserta tabel `time` dan `source` di bawahnya, maka log Suricata sudah berhasil diterima oleh Kibana. Yeayy.
+
+![](https://github.com/satriowaskitho/suricata/blob/master/images/901.png)
+
 
 
 ## 10. Instalasi Filebeat
