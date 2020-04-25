@@ -304,6 +304,7 @@ Suricata-update memerlukan _permission_ pada beberapa _directory_ tertentu.
 ## 3. Instalasi Java 8
 Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: Java 9 is not supported_.
 
+### 3.1 Instal Java 8
 -	Jalankan _commarnd_ berikut untuk menginstal java 8. Tunggu sampai proses instalasi selesai.
 
 	```bash
@@ -323,8 +324,36 @@ Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: 
 	OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
 	```
 
-## 4. Instalasi Elasticsearch
+### 3.2 Konfigurasi `JAVA_HOME`
+- Masuk ke _directory_ di bawah.
 
+	```bash
+	sudo nano /etc/environment
+	```
+	>Tambahkan pada baris paling akhir, konfigurasi ini.
+
+	```bash
+	JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/"
+	```
+
+- _Reload_ untuk menerapkan perubahan tersebut.
+
+	```bash
+	source /etc/environment
+	```
+
+- Cek apakah perubahan telah diterapkan.
+
+	```bash
+	echo $JAVA_HOME
+	```
+	>Output:
+	```bash
+	/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/
+	```
+
+## 4. Instalasi Elasticsearch
+### 4.1 Instal Elasticsearch
 - Dimulai dengan mengimport _Elasticsearch public GPG key_ ke dalam APT. Bila sukses akan muncul _feedback_ _'OK'_.
 
 	```bash
@@ -342,6 +371,17 @@ Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: 
 	```bash
 	sudo apt update
 	sudo apt -y install elasticsearch
+	```
+
+### 4.2 Konfigurasi Elasticsearch
+- Masuk ke konfigurasi _file_ Elasticsearch
+
+	```bash
+	sudo nano /etc/default/elasticsearch
+	```
+	>_Uncomment_ `JAVA_HOME`  dan masukan _directory_ ini.
+	```bash
+	JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/
 	```
 
 - Jalankan dan perbolehkan Elasticsearch _start_ otomatis ketika server dihidupkan.
@@ -378,10 +418,66 @@ Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: 
 	```
 
 ## 5. Instalasi Kibana
+### 5.1 Instal Kibana
+Instal Kibana. Tunggu sampai proses instalasi selesai.
 
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
+```bash
+sudo apt -y install kibana
+```
 
-### 5. Instal Template Kibana 6
+### 5.2 Konfigurasi Kibana
+Masuk ke _file_ konfigruasi Kibana.
+
+```bash
+sudo nano /etc/kibana/kibana.yml
+```
+>_Uncomment_  `server.port` dan ubah `server.host` sesuai _IP Address_ kalian.
+
+```
+server.port: 5601
+server.host: "192.168.100.11"
+```
+
+![](https://github.com/satriowaskitho/suricata/blob/master/images/501.png)
+
+- Jalankan dan perbolehkan Kibana _start_ otomatis ketika server dihidupkan.
+
+	```bash
+	sudo systemctl start kibana
+	sudo systemctl enable kibana
+	```
+
+- Buka `port 5061` agar bisa diakses oleh _web browser_.
+
+	```bash
+	sudo ufw allow from any to any port 5601 proto tcp
+	```
+
+### 5.3 Instal Template Kibana 6
+- Masuk ke _directory_ `/etc/logstash` dengan _command_ di bawah.
+
+	```bash
+	cd /etc/logstash
+	```
+- Instal `git-core`, `clone` _template_ Kibana 6, dan masuk ke _folder_ hasil _clone_.
+
+	```bash
+	sudo apt-get install git-core
+	sudo git clone https://github.com/StamusNetworks/KTS6.git
+	cd KTS6
+	```
+
+- Masih di _directory_ KTS6. Muat _dashboard_ KTS6 dengan _command_ berikut. Tunggu sampai proses selesai.
+
+	```bash
+	./load.sh
+	```
+
+- Terakhir, pindahkan `elasticsearch6-template.json` ke _directory_ `/etc/logstash`.
+
+	```bash
+	sudo mv /etc/logstash/KTS6/es-template/elasticsearch6-template.json /etc/logstash
+	```
 
 ## 6. Instalasi Logstash
 ### 6.1 Instal Logstash
@@ -535,5 +631,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	sudo systemctl enable logstash
 	```
 
+## 8. Tes Suricata
 
-## 8. Instalasi Filebeat
+## 9. Instalasi Filebeat
+
