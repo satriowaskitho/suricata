@@ -241,7 +241,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	$ sudo nano /etc/suricata/suricata.yaml
 	```
 
-	> - Tekan, `Alt+R`. 
+	> - Bila telah masuk ke dalam _file_, tekan `Alt+R`. 
 	> - **_Search to (Replace)_**, masukan 'eth0'.
 	> - **_Replace with_**, masukan _network interface_ kalian (ex. <ins>enp0s3</ins>).
 	> - Tekan, 'A' pada _keyboard_ untuk _replace all_.
@@ -261,7 +261,7 @@ ke _Directory_ installer Ubuntu 18.04 LTS yang sudah diunduh.
 	$ sudo nano /etc/default/suricata
 	```
 
-	> - Tekan, `Alt+R`. 
+	> - Bila telah masuk ke dalam _file_, tekan `Alt+R`. 
 	> - **_Search to (Replace)_**, masukan 'eth0'.
 	> - **_Replace with_**, masukan _network interface_ kalian (ex. enp0s3).
 	> - Tekan 'A' pada _keyboard_ untuk _replace all_.
@@ -299,7 +299,7 @@ Suricata-update memerlukan _permission_ pada beberapa _directory_ tertentu.
 	sudo chgrp -R suricata /etc/suricata
 	```
 	
-	>Jalankan suricata-update untuk pertama kalinya dan tunggu sampai `Testing with suricata` _'Done'_.
+	>Jalankan suricata-update untuk pertama kalinya dan tunggu sampai `Testing with suricata` bertuliskan `Done`.
 
 	```bash
 	sudo suricata-update
@@ -325,7 +325,7 @@ Suricata-update memerlukan _permission_ pada beberapa _directory_ tertentu.
 
 ### 2.5 Mencari Sumber _Rules_ Lain Yang Tersedia
 
-- Pertama, _update_  indeks sumber _rules_ dengan _command update-sources_.
+- Pertama, _update_  indeks sumber _rules_ dengan _command_ `update-sources`.
 
 	```bash
 	sudo suricata-update update-sources
@@ -409,7 +409,7 @@ Elasticsearch dan logstash memerlukan `OpenJDK` yang tersedia di server. _Note: 
 
 ## 4. Instalasi Elasticsearch
 ### 4.1 Instal Elasticsearch
-- Dimulai dengan mengimport _Elasticsearch public GPG key_ ke dalam APT. Bila sukses akan muncul _feedback_ _'OK'_.
+- Dimulai dengan mengimport _Elasticsearch public GPG key_ ke dalam APT. Bila sukses akan muncul _feedback_ `OK`.
 
 	```bash
 	sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -693,8 +693,7 @@ Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi 
 	```
 
 ## 7. Tes Suricata
-- **_Turn Off Packages Offload_**
-Ubah sesuai _network interface_ masing-masing.
+- **_Turn Off Packages Offload_**, ubah sesuai _network interface_ masing-masing.
 
 	```bash
 	sudo ethtool -K enp0s3 tso off  
@@ -717,12 +716,13 @@ Ubah sesuai _network interface_ masing-masing.
 Akses URL Kibana. Tunggu sampai _loading_ selesai.
 >http://[IP_Address_Server]:5601
 
-Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian masuk ke dashboard Kibana. Maka kalian akan diminta untuk memilih `default index`.
+Masuk ke tab `Discover`, berada di kiri atas. Bila ini pertama kalinya kalian masuk ke dashboard Kibana. Maka, kalian akan diminta untuk memilih `default index`.
+
+![](https://github.com/satriowaskitho/suricata/blob/master/images/901.png)
+
 - Pilih `logstash-*`, tepat berada di bawah tombol `Create Index Pattern`.
 - Lalu, buat indeks tersebut menjadi `default` dengan cara klik tombol `bintang` . Tombol tersebut berada di kanan atas, sejajar dengan tombol `refresh` dan `remove`.
 - Setelah itu, kalian akan diarahkan ke tampilan tab `decover` yang sebenarnya. Bila terdapat @timestamp _barchart_ beserta tabel `time` dan `source` di bawahnya, maka log Suricata sudah berhasil diterima oleh Kibana. Yeayy.
-
-![](https://github.com/satriowaskitho/suricata/blob/master/images/901.png)
 
 Kemudian, akses tab `Dashboard`. Di sana akan banyak pilihan dashboard bila instalasi _template_ nya <ins>berhasil</ins> hehe. Karena baru pertama kali, kalian bisa mencoba dashboard `SN-OVERVIEW`. Dashbord tersebut menampilkan banyak grafik dari aktifitas server yang dibaca oleh Suricata.
 
@@ -734,3 +734,6 @@ Eurekaaa~ :D
 
 ## 9. Instalasi Filebeat
 To be continue...
+
+## 10. Simulasi Suricata
+On planning...
