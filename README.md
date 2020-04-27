@@ -508,7 +508,27 @@ server.host: "192.168.100.11"
 	sudo ufw allow from any to any port 5601 proto tcp
 	```
 
-### 5.3 Instal Template Kibana 6
+## 6. Instalasi Logstash
+### 6.1 Instal Logstash
+- Instal Logstash. Tunggu sampai proses instalasi selesai.
+
+	```bash
+	sudo apt -y install logstash
+	```
+
+- Pastikan Logstash dapat membaca _log file_ dengan menjalankan _command_ berikut.
+
+	```bash
+	sudo usermod -a -G adm logstash
+	```
+
+- _Update plugin_  Logstash dengan menjalankan _command_ di bawah. Proses akan cenderung lama. Tunggu sampai proses selesai.
+
+	```bash
+	sudo /usr/share/logstash/bin/logstash-plugin update
+	```
+
+### 6.2 Instal Template Kibana 6
 - Masuk ke _directory_ `/etc/logstash` dengan _command_ di bawah.
 
 	```bash
@@ -534,27 +554,7 @@ server.host: "192.168.100.11"
 	sudo mv /etc/logstash/KTS6/es-template/elasticsearch6-template.json /etc/logstash
 	```
 
-## 6. Instalasi Logstash
-### 6.1 Instal Logstash
-- Instal Logstash. Tunggu sampai proses instalasi selesai.
-
-	```bash
-	sudo apt -y install logstash
-	```
-
-- Pastikan Logstash dapat membaca _log file_ dengan menjalankan _command_ berikut.
-
-	```bash
-	sudo usermod -a -G adm logstash
-	```
-
-- _Update plugin_  Logstash dengan menjalankan _command_ di bawah. Proses akan cenderung lama. Tunggu sampai proses selesai.
-
-	```bash
-	sudo /usr/share/logstash/bin/logstash-plugin update
-	```
-
-### 6.2 Download GeoLite2-City
+### 6.3 Download GeoLite2-City
 - Masuk ke _directory_ `/usr/share/GeoIP` dengan _command_ di bawah.
 
 	```bash
@@ -585,7 +585,7 @@ server.host: "192.168.100.11"
 	sudo mv /usr/share/GeoIP/GeoLite2-City_20200421/GeoLite2-City.mmdb /usr/share/GeoIP
 	```
 
-### 6.3 Konfigurasi Logstash
+### 6.4 Konfigurasi Logstash
 Tutorial hanya akan membuat 1 (satu) _file_ konfigurasi. _File_ tersebut berisi konfigurasi _input_ sekaligus _output_.
 
 - Buat _file_ bernama `logstash.conf` dengan _command_ berikut.
